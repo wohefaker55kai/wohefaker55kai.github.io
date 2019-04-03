@@ -1,0 +1,1 @@
+What will be printed when the code below is executed?

@@ -1,0 +1,7 @@
+What will be printed when the code below is executed?(Hint: Use the template below)
+*ast.File:
+        ____: ____
+        *ast.GenDecl:
+                *ast.ValueSpec:
+                        ____: ____
+                        ____: ____

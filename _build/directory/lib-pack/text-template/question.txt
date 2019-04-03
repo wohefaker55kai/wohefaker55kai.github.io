@@ -1,0 +1,5 @@
+Complete the code in line A, to generate content with text template for at most 3 tiers. The expected output is as follows:
+A
+ B
+  C
+ D

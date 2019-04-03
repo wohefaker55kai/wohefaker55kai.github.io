@@ -1,0 +1,5 @@
+Remove unnecessary code
+Remove redundant varibles and logics
+Optimize register or memory allocation
+Transform varibles to constants when possible
+Transform "high cost" instructions to "low cost"

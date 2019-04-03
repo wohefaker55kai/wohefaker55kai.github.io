@@ -1,0 +1,2 @@
+$GOROOT is the root directory for standard library, including executables, source code and docs.
+$GOPATH is the directory for 3rd party packages.

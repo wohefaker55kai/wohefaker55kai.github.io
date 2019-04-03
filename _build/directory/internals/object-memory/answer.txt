@@ -1,0 +1,2 @@
+For small objects(<=32KB), go runtime starts with cache firstly, then central, and finally heap.
+For big objects(>32KB), directly from heap.

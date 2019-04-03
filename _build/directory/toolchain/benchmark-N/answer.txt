@@ -1,0 +1,1 @@
+The value of b.N will increase each time until the benchmark runner is satisfied with the stability of the benchmark.

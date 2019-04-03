@@ -1,0 +1,1 @@
+go generate will search specified directories or files for comments like "//go:generate", and replace with the output of the execution of the given shell commands, and flush the final content to stdout.

@@ -1,0 +1,2 @@
+What does runtime.newobject() do?
+Does make() and `new` operation always invoke runtime.newobject()?

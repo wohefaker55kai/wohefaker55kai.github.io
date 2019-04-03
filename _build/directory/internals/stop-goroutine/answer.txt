@@ -1,0 +1,4 @@
+runtime.Gosched: give up CPU core and join the queue, thus will be executed automatically.
+runtime.gopark: blocked until the callback function unlockf in argument list return false.
+runtime.notesleep: hibernate the thread.
+runtime.Goexit: stop the execution of goroutine immediately and call defer, but it will not cause panic.

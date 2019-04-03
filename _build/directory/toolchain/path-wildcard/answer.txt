@@ -1,0 +1,1 @@
+It is the wildcard stands for .(current directory) and all its subdirectories recursively.

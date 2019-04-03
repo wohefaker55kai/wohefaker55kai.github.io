@@ -1,0 +1,3 @@
+-l:disable function inlining
+-m:show the escape analysis and the choice of inlining
+-N:disable optimization

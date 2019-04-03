@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Awesome Go Interview Questions and Answers</title>
+    <meta content="Go, Golang, Quiz, Interview questions, Awesome" name=description> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/assets/bs.js"></script>
+    <script src="/assets/script.js"></script>
+</head>
+
+<body>
+    <div class="bs-docs-header" id="content" tabindex="-1">
+        <div class="container">
+            <h1>Awesome Go Interview Questions and Answers</h1>
+            <a class="github-button" href="https://github.com/goquiz/goquiz.github.io" data-icon="octicon-star" data-show-count="true" aria-label="Star goquiz/goquiz.github.io on GitHub">Star</a>
+            <a class="github-button" href="https://github.com/goquiz/goquiz.github.io/issues" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue huazhihao/goquiz.github.io on GitHub">Issue</a>
+            <a class="github-button" href="https://github.com/huazhihao" data-show-count="true" aria-label="Follow @huazhihao on GitHub">Follow @huazhihao</a>
+        </div>
+    </div>
+    <div class="container bs-docs-container">
+        <div class=row>
+            <div class=col-md-9 role=main>
+                {{range $section := .Sections}}<div class=bs-docs-section>
+                    <h1 class=page-header id={{$section.Key}}>{{$section.Name}}</h1>
+                    {{range $quiz := $section.Quizzes}}
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/{{$section.Key}}/{{$quiz.Key}}" target="_blank">Report an issue</a>
+                    <h2 id={{$quiz.Key}}>{{$quiz.Name}}</h2>
+
+                    <div class="bs-example gq-question">
+                        {{$quiz.Question}}
+                    </div>
+
+                    {{if $quiz.Main}}
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+{{$quiz.Main}}
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    {{end}}
+
+                    {{if $quiz.Code}}
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+{{$quiz.Code}}
+                        </code></pre>
+                    </figure>
+                    {{end}}
+
+                    {{if $quiz.Answer}}
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+{{$quiz.Answer}}
+                            </code></pre>
+                    </figure>
+                    {{end}}
+
+                    {{end}}
+                </div>{{end}}
+
+                <div class=bs-docs-section>
+                    <h1 class=page-header id=references>References</h1>
+                    <h2 id=golang-ref-spec><a target="_blank" href="https://golang.org/ref/spec">Go Language Specification</a></h2>
+                    <h2 id=golang-ref-pkg><a target="_blank" href="https://golang.org/pkg/">Go Packages</a></h2>
+                    <h2 id=book-go-yuhen><a target="_blank" href="https://www.amazon.com/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%9B%A8%E7%97%95/dp/B01N23X9CZ/">Go Study Notes - Yuhen</a></h2>
+                    <h2 id=gotchas-and-common-mistakes-in-go-golang><a target="_blank" href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/">Common Mistakes for New Golang Devs</a></h2>
+                    <h2 id=dave-cheney-go><a target="_blank" href="https://dave.cheney.net/category/golang">Dave Cheney's Blog</a></h2>
+                    <h2 id=golangweekly><a target="_blank" href="https://golangweekly.com/">Golang Weekly</a></h2>
+                </div>
+
+            </div><!--main-->
+
+            <div class=col-md-3 role=complementary>
+                <nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs">
+                    <ul class="nav bs-docs-sidenav">
+                        {{range $section := .Sections}}<li>
+                            <a href=#{{$section.Key}}>{{$section.Name}}</a>
+                            <ul class=nav>
+                                {{range $quiz := $section.Quizzes}}<li>
+                                    <a href=#{{$quiz.Key}}>{{$quiz.Name}}</a>
+                                </li>{{end}}
+                            </ul>
+                        </li>{{end}}
+                        <li>
+                            <a href=#references>References</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#golang-ref-spec>The Go Programming Language Specification</a>
+                                    <a href=#golang-ref-pkg>Packages - The Go Programming Language</a>
+                                    <a href=#book-go-yuhen>Go Study Notes - Yuhen</a>
+                                    <a href=#gotchas-and-common-mistakes-in-go-golang>Common Mistakes for New Golang Devs</a>
+                                    <a href=#dave-cheney-go>Dave Cheney's Blog</a>
+                                    <a href=#golangweekly>Golang Weekly</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a href=#top class=back-to-top> Back to top </a>
+                </nav>
+            </div>
+            <!--index-->
+        </div>
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12643045-7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-12643045-7');
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>

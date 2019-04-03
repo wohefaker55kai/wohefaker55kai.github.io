@@ -1,0 +1,2 @@
+1. Compile str.go to shared object(str.so).
+2. Fill in the blanks in line A and B to call function `UpperCase(string) string`.

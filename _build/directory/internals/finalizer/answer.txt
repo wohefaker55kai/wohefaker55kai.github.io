@@ -1,0 +1,1 @@
+There is no destructor in go. But runtime.SetFinalizer() can set a callback function for a pointer.

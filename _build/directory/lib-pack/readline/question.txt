@@ -1,0 +1,6 @@
+Compare and contrast the functions below for the use case of traversing each line of a text file.
+
+fmt.Fscanf()
+bufio.Reader.ReadLine()
+bufio.ReadString('\n')
+bufio.Scanner.Scan()

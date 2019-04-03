@@ -1,0 +1,1 @@
+Briefly introduce the strategies that how go runtime allocates memory.

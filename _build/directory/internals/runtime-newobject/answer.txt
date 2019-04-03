@@ -1,0 +1,2 @@
+runtime.newobject() is to allocate heap memory.
+make() and `new` operation will not invoke runtime.newobject() when it is inlined or optimized.

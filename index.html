@@ -1,0 +1,2850 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Awesome Go Interview Questions and Answers</title>
+    <meta content="Go, Golang, Quiz, Interview questions, Awesome" name=description> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/assets/bs.js"></script>
+    <script src="/assets/script.js"></script>
+</head>
+
+<body>
+    <div class="bs-docs-header" id="content" tabindex="-1">
+        <div class="container">
+            <h1>Awesome Go Interview Questions and Answers</h1>
+            <a class="github-button" href="https://github.com/goquiz/goquiz.github.io" data-icon="octicon-star" data-show-count="true" aria-label="Star goquiz/goquiz.github.io on GitHub">Star</a>
+            <a class="github-button" href="https://github.com/goquiz/goquiz.github.io/issues" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue huazhihao/goquiz.github.io on GitHub">Issue</a>
+            <a class="github-button" href="https://github.com/huazhihao" data-show-count="true" aria-label="Follow @huazhihao on GitHub">Follow @huazhihao</a>
+        </div>
+    </div>
+    <div class="container bs-docs-container">
+        <div class=row>
+            <div class=col-md-9 role=main>
+                <div class=bs-docs-section>
+                    <h1 class=page-header id=lang-spec>Language Specification</h1>
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/subslice-grow" target="_blank">Report an issue</a>
+                    <h2 id=subslice-grow>Subslice</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+func main() {
+	s := []int{1, 2, 3}
+	ss := s[1:]
+	ss = append(ss, 4)
+
+	for _, v := range ss {
+		v &#43;= 10
+	}
+
+	for i := range ss {
+		ss[i] &#43;= 10
+	}
+
+	fmt.Println(s)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/short-declairation" target="_blank">Report an issue</a>
+                    <h2 id=short-declairation>Short Declairation</h2>
+
+                    <div class="bs-example gq-question">
+                        Assuming x is declared and y is not declared, which clauses below are correct?
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+x, _ := f()
+x, _ = f()
+x, y := f()
+x, y = f()
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+x, _ := f() //incorrect
+x, _ = f() //correct
+x, y := f() //correct
+x, y = f() //incorrect
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/interface-nil" target="_blank">Report an issue</a>
+                    <h2 id=interface-nil>Nil Interfaces</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+And explain why `println(InitType() == nil)` cannot be compiled?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+type S struct{}
+
+func (s S) F() {}
+
+type IF interface {
+	F()
+}
+
+func InitType() S {
+	var s S
+	return s
+}
+
+func InitPointer() *S {
+	var s *S
+	return s
+}
+func InitEfaceType() interface{} {
+	var s S
+	return s
+}
+
+func InitEfacePointer() interface{} {
+	var s *S
+	return s
+}
+
+func InitIfaceType() IF {
+	var s S
+	return s
+}
+
+func InitIfacePointer() IF {
+	var s *S
+	return s
+}
+
+func main() {
+	//println(InitType() == nil)
+	println(InitPointer() == nil)
+	println(InitEfaceType() == nil)
+	println(InitEfacePointer() == nil)
+	println(InitIfaceType() == nil)
+	println(InitIfacePointer() == nil)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/map-ok-idiom" target="_blank">Report an issue</a>
+                    <h2 id=map-ok-idiom>Map Ok-Idiom</h2>
+
+                    <div class="bs-example gq-question">
+                        Correct two mistakes in line A and B.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func main() {
+	var m map[string]int //A
+	m[&#34;a&#34;] = 1
+	if v := m[&#34;b&#34;]; v != nil { //B
+		println(v)
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+func main() {
+	m := make(map[string]int)
+	m[&#34;a&#34;] = 1
+	if v, ok := m[&#34;b&#34;]; ok {
+		println(v)
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/pointer" target="_blank">Report an issue</a>
+                    <h2 id=pointer>Pointers</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blanks in line A and B, to assure the printed output is &#34;foo&#34;
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+type S struct {
+	m string
+}
+
+func f() *S {
+	return __ //A
+}
+
+func main() {
+	p := __    //B
+	print(p.m) //print &#34;foo&#34;
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+type S struct {
+    m string
+}
+
+func f() *S {
+    return &amp;S{&#34;foo&#34;} //A
+}
+
+func main() {
+    p := *f()  //B
+    print(p.m) //print &#34;foo&#34;
+}
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/empty-interface" target="_blank">Report an issue</a>
+                    <h2 id=empty-interface>interface{} Pointers</h2>
+
+                    <div class="bs-example gq-question">
+                        In line ABCD, which ones of them have syntax issues?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+type S struct {
+}
+
+func f(x interface{}) {
+}
+
+func g(x *interface{}) {
+}
+
+func main() {
+	s := S{}
+	p := &amp;s
+	f(s) //A
+	g(s) //B
+	f(p) //C
+	g(p) //D
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+type S struct {
+}
+
+func f(x interface{}) {
+}
+
+func g(x *interface{}) {
+}
+
+func main() {
+    s := S{}
+    p := &amp;s
+    f(s) //A correct
+    g(s) //B incorrect
+    f(p) //C correct
+    g(p) //D incorrect
+}
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/for-pointer" target="_blank">Report an issue</a>
+                    <h2 id=for-pointer>Temporary Pointer</h2>
+
+                    <div class="bs-example gq-question">
+                        Explain why the printed output of below are 333, and modify line A to assure 012 is printed.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+const N = 3
+
+func main() {
+	m := make(map[int]*int)
+
+	for i := 0; i &lt; N; i&#43;&#43; {
+		m[i] = &amp;i //A
+	}
+
+	for _, v := range m {
+		print(*v)
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+const N = 3
+
+func main() {
+	m := make(map[int]*int)
+
+	for i := 0; i &lt; N; i&#43;&#43; {
+		j := int(i)
+		m[i] = &amp;j
+	}
+
+	for _, v := range m {
+		print(*v)
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/label-break" target="_blank">Report an issue</a>
+                    <h2 id=label-break>Break Outer Loop</h2>
+
+                    <div class="bs-example gq-question">
+                        Modify the code below, to exit the outer for-loop?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func main() {
+	for i := 0; i &lt; 3; i&#43;&#43; {
+		for j := 0; j &lt; 3; j&#43;&#43; {
+			print(i, &#34;,&#34;, j, &#34; &#34;)
+			break
+		}
+		println()
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+func main() {
+outer:
+	for i := 0; i &lt; 3; i&#43;&#43; {
+		for j := 0; j &lt; 3; j&#43;&#43; {
+			print(i, &#34;,&#34;, j, &#34; &#34;)
+			break outer
+		}
+		println()
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/global-varible" target="_blank">Report an issue</a>
+                    <h2 id=global-varible>Global Varibles</h2>
+
+                    <div class="bs-example gq-question">
+                        To declare g as a global variable, which clauses below are correct?
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+var g
+var g G
+var g = G{}
+g := G{}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+var g //incorrect
+var g G //correct
+var g = G{} //correct
+g := G{} //incorrect
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-closefile" target="_blank">Report an issue</a>
+                    <h2 id=defer-closefile>Defer Stack</h2>
+
+                    <div class="bs-example gq-question">
+                        Correct a mistake about defer in the code below
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;io/ioutil&#34;
+	&#34;os&#34;
+)
+
+func main() {
+	f, err := os.Open(&#34;file&#34;)
+	defer f.Close()
+	if err != nil {
+		return
+	}
+
+	b, err := ioutil.ReadAll(f)
+	println(string(b))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;io/ioutil&#34;
+	&#34;os&#34;
+)
+
+func main() {
+	f, err := os.Open(&#34;file&#34;)
+	if err != nil {
+		return
+	}
+	defer f.Close()
+
+	b, err := ioutil.ReadAll(f)
+	println(string(b))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-panic" target="_blank">Report an issue</a>
+                    <h2 id=defer-panic>Panic Stack</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func f1() {
+	defer println(&#34;f1-begin&#34;)
+	f2()
+	defer println(&#34;f1-end&#34;)
+}
+
+func f2() {
+	defer println(&#34;f2-begin&#34;)
+	f3()
+	defer println(&#34;f2-end&#34;)
+}
+
+func f3() {
+	defer println(&#34;f3-begin&#34;)
+	panic(0)
+	defer println(&#34;f3-end&#34;)
+}
+
+func main() {
+	f1()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-recover" target="_blank">Report an issue</a>
+                    <h2 id=defer-recover>recover()</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+What will be the exit code after the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import &#34;log&#34;
+
+func f() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf(&#34;recover:%#v&#34;, r)
+		}
+	}()
+	panic(1)
+	panic(2)
+}
+
+func main() {
+	f()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/goroutine-closure" target="_blank">Report an issue</a>
+                    <h2 id=goroutine-closure>Goroutine Closures</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+And fix the issue to assure that `len(m)` is printed as 10.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			mu.Lock()
+			m[i] = i
+			mu.Unlock()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			defer wg.Done()
+			mu.Lock()
+			m[i] = i
+			mu.Unlock()
+		}(i)
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/type-shadowing" target="_blank">Report an issue</a>
+                    <h2 id=type-shadowing>Type Shadowing</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+type S1 struct{}
+
+func (s1 S1) f() {
+	fmt.Println(&#34;S1.f()&#34;)
+}
+func (s1 S1) g() {
+	fmt.Println(&#34;S1.g()&#34;)
+}
+
+type S2 struct {
+	S1
+}
+
+func (s2 S2) f() {
+	fmt.Println(&#34;S2.f()&#34;)
+}
+
+type I interface {
+	f()
+}
+
+func printType(i I) {
+	fmt.Printf(&#34;%T\n&#34;, i)
+	if s1, ok := i.(S1); ok {
+		s1.f()
+		s1.g()
+	}
+	if s2, ok := i.(S2); ok {
+		s2.f()
+		s2.g()
+	}
+}
+
+func main() {
+	printType(S1{})
+	printType(S2{})
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/string-bytes" target="_blank">Report an issue</a>
+                    <h2 id=string-bytes>String to Bytes</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func main() {
+	s := &#34;123&#34;
+	ps := &amp;s
+	b := []byte(*ps)
+	pb := &amp;b
+
+	s &#43;= &#34;4&#34;
+	*ps &#43;= &#34;5&#34;
+	b[1] = &#39;0&#39;
+
+	println(*ps)
+	println(string(*pb))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/mutex-map" target="_blank">Report an issue</a>
+                    <h2 id=mutex-map>Map Mutex</h2>
+
+                    <div class="bs-example gq-question">
+                        Fix the issue below to avoid &#34;concurrent map writes&#34; error.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;math/rand&#34;
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			m[rand.Int()] = rand.Int()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;math/rand&#34;
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			mu.Lock()
+			m[rand.Int()] = rand.Int()
+			mu.Unlock()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/DeepEqual" target="_blank">Report an issue</a>
+                    <h2 id=DeepEqual>DeepEqual</h2>
+
+                    <div class="bs-example gq-question">
+                        Explain why the printed output is false?
+Modify line A to assure the printed output really equals to equality of the values of x and y.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+type S struct {
+	a, b, c string
+}
+
+func main() {
+	x := interface{}(&amp;S{&#34;a&#34;, &#34;b&#34;, &#34;c&#34;})
+	y := interface{}(&amp;S{&#34;a&#34;, &#34;b&#34;, &#34;c&#34;})
+	fmt.Println(x == y) //A
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;reflect&#34;
+)
+
+type S struct {
+	a, b, c string
+}
+
+func main() {
+	x := interface{}(&amp;S{&#34;a&#34;, &#34;b&#34;, &#34;c&#34;})
+	y := interface{}(&amp;S{&#34;a&#34;, &#34;b&#34;, &#34;c&#34;})
+	fmt.Println(reflect.DeepEqual(x, y))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/Gosched" target="_blank">Report an issue</a>
+                    <h2 id=Gosched>Gosched</h2>
+
+                    <div class="bs-example gq-question">
+                        Add code in line A to assure that the lowercase letters and capital letters are printed consecutively.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;runtime&#34;
+	&#34;sync&#34;
+)
+
+const N = 26
+
+func main() {
+	const GOMAXPROCS = 1
+	runtime.GOMAXPROCS(GOMAXPROCS)
+
+	var wg sync.WaitGroup
+	wg.Add(2 * N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			defer wg.Done()
+			// A
+			fmt.Printf(&#34;%c&#34;, &#39;a&#39;&#43;i)
+		}(i)
+		go func(i int) {
+			defer wg.Done()
+			fmt.Printf(&#34;%c&#34;, &#39;A&#39;&#43;i)
+		}(i)
+	}
+	wg.Wait()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;runtime&#34;
+	&#34;sync&#34;
+)
+
+const N = 26
+
+func main() {
+	const GOMAXPROCS = 1
+	runtime.GOMAXPROCS(GOMAXPROCS)
+
+	var wg sync.WaitGroup
+	wg.Add(2 * N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			defer wg.Done()
+			runtime.Gosched()
+			fmt.Printf(&#34;%c&#34;, &#39;a&#39;&#43;i)
+		}(i)
+		go func(i int) {
+			defer wg.Done()
+			fmt.Printf(&#34;%c&#34;, &#39;A&#39;&#43;i)
+		}(i)
+	}
+	wg.Wait()
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/map-addressing" target="_blank">Report an issue</a>
+                    <h2 id=map-addressing>Map Immutability</h2>
+
+                    <div class="bs-example gq-question">
+                        Explain why the code below cannot compile and fix it.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+type S struct {
+	name string
+}
+
+func main() {
+	m := map[string]S{&#34;x&#34;: S{&#34;one&#34;}}
+	m[&#34;x&#34;].name = &#34;two&#34;
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+type S struct {
+	name string
+}
+
+func main() {
+	m := map[string]*S{&#34;x&#34;: &amp;S{&#34;one&#34;}}
+	m[&#34;x&#34;].name = &#34;two&#34;
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/sort-Slice" target="_blank">Report an issue</a>
+                    <h2 id=sort-Slice>Slice Sorting</h2>
+
+                    <div class="bs-example gq-question">
+                        Add code to line A to sort s in ascending order
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+type S struct {
+	v int
+}
+
+func main() {
+	s := []S{{1}, {3}, {5}, {2}}
+	// A
+	fmt.Printf(&#34;%#v&#34;, s)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;sort&#34;
+)
+
+type S struct {
+	v int
+}
+
+func main() {
+	s := []S{{1}, {3}, {5}, {2}}
+	sort.Slice(s, func(i, j int) bool { return s[i].v &lt; s[j].v })
+	fmt.Printf(&#34;%#v&#34;, s)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                </div><div class=bs-docs-section>
+                    <h1 class=page-header id=lib-pack>Standard library and Packages</h1>
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/init-import" target="_blank">Report an issue</a>
+                    <h2 id=init-import>init()</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the execution sequence of init() in the go files below.
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+// A/a1.go
+package A
+func init() {
+    println(&#34;a1&#34;)
+}
+var A1 = &#34;&#34;
+
+// A/a2.go
+package A
+func init() {
+	println(&#34;a2&#34;)
+}
+var A2 = &#34;&#34;
+
+
+// B/b1.go
+package B
+func init() {
+	println(&#34;b1&#34;)
+}
+var B1 = &#34;&#34;
+
+
+// B/b2.go
+package B
+import &#34;github.com/test/A&#34;
+func init() {
+	println(&#34;b2&#34;)
+}
+func f() {
+	_ = A.A2
+}
+var B2 = &#34;&#34;
+
+
+// C/main.go
+package main
+import (
+	&#34;github.com/test/B&#34;
+)
+func main() {
+	_ = B.B2
+}
+
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+a1
+a2
+b1
+b2
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/json-unmarshal" target="_blank">Report an issue</a>
+                    <h2 id=json-unmarshal>json unmarshalling</h2>
+
+                    <div class="bs-example gq-question">
+                        Fix the issue below to assure result.status is printed as 200
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;encoding/json&#34;
+	&#34;fmt&#34;
+)
+
+type Result struct {
+	status int
+}
+
+func main() {
+	var data = []byte(`{&#34;status&#34;: 200}`)
+	result := &amp;Result{}
+
+	if err := json.Unmarshal(data, result); err != nil {
+		fmt.Println(&#34;error:&#34;, err)
+		return
+	}
+
+	fmt.Printf(&#34;result=%&#43;v&#34;, result)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;encoding/json&#34;
+	&#34;fmt&#34;
+)
+
+type Result struct {
+	Status int `json:&#34;status&#34;`
+}
+
+func main() {
+	var data = []byte(`{&#34;status&#34;: 200}`)
+	result := &amp;Result{}
+
+	if err := json.Unmarshal(data, result); err != nil {
+		fmt.Println(&#34;error:&#34;, err)
+		return
+	}
+
+	fmt.Printf(&#34;result=%&#43;v&#34;, result)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/utf8-len" target="_blank">Report an issue</a>
+                    <h2 id=utf8-len>utf8 length</h2>
+
+                    <div class="bs-example gq-question">
+                        Fix the mistake below to assure the length of utf8 string can be printed correctly.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+func main() {
+	fmt.Println(len(&#34;你好&#34;))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unicode/utf8&#34;
+)
+
+func main() {
+	fmt.Println(utf8.RuneCountInString(&#34;你好&#34;))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/regex-multiline" target="_blank">Report an issue</a>
+                    <h2 id=regex-multiline>regex multiline mode</h2>
+
+                    <div class="bs-example gq-question">
+                        Fix the regex pattern in line A, to replace all consecutive 0s to one 0 when 0 is the beginning of the line.
+The expected output is like:
+100
+0
+1
+0
+1
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;regexp&#34;
+)
+
+func main() {
+	s := `100
+00
+0
+1
+0
+
+0
+1`
+	pattern := regexp.MustCompile(&#34;0(0|\n)*0&#34;) //A
+	s = pattern.ReplaceAllString(s, &#34;0&#34;)
+	fmt.Println(s)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;regexp&#34;
+)
+
+func main() {
+	s := `100
+00
+0
+1
+0
+
+0
+1`
+	pattern := regexp.MustCompile(&#34;(?m:^0(0|\n)*0)&#34;)
+	s = pattern.ReplaceAllString(s, &#34;0&#34;)
+	fmt.Println(s)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/readline" target="_blank">Report an issue</a>
+                    <h2 id=readline>readline</h2>
+
+                    <div class="bs-example gq-question">
+                        Compare and contrast the functions below for the use case of traversing each line of a text file.
+
+fmt.Fscanf()
+bufio.Reader.ReadLine()
+bufio.ReadString(&#39;\n&#39;)
+bufio.Scanner.Scan()
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+bufio.Scanner.Scan(): Best suited
+fmt.Fscanf(): Only applicable to formated lines
+bufio.Reader.ReadLine(): Very low level. May require more invocations when buffer limit is exceeded.
+bufio.ReadString(&#39;\n&#39;): Cannot handle EOF
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/container-heap" target="_blank">Report an issue</a>
+                    <h2 id=container-heap>Heap</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;container/heap&#34;
+	&#34;fmt&#34;
+)
+
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] &lt; h[j] }
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *IntHeap) Push(x interface{}) {
+	*h = append(*h, x.(int))
+}
+
+func (h *IntHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
+func main() {
+	h := &amp;IntHeap{2, 1, 5}
+	heap.Init(h)
+	for h.Len() &gt; 0 {
+		fmt.Printf(&#34;%d &#34;, heap.Pop(h))
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/context-withtimeout" target="_blank">Report an issue</a>
+                    <h2 id=context-withtimeout>context.WithTimeout</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;context&#34;
+	&#34;fmt&#34;
+	&#34;time&#34;
+)
+
+func main() {
+	timeout := 3 * time.Second
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	select {
+	case &lt;-time.After(1 * time.Second):
+		fmt.Println(&#34;waited for 1 sec&#34;)
+	case &lt;-time.After(2 * time.Second):
+		fmt.Println(&#34;waited for 2 sec&#34;)
+	case &lt;-time.After(3 * time.Second):
+		fmt.Println(&#34;waited for 3 sec&#34;)
+	case &lt;-ctx.Done():
+		fmt.Println(ctx.Err())
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/flag" target="_blank">Report an issue</a>
+                    <h2 id=flag>flag</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blanks in line A and B, to parse terminal arguments to ip and port, which default to 0.0.0.0 and 8000.
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import &#34;flag&#34;
+import &#34;fmt&#34;
+
+var ip string
+var port int
+
+func init() {
+	// A
+	// B
+}
+
+func main() {
+	flag.Parse()
+	fmt.Printf(&#34;%s:%d&#34;, ip, port)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import &#34;flag&#34;
+import &#34;fmt&#34;
+
+var ip string
+var port int
+
+func init() {
+	flag.StringVar(&amp;ip, &#34;ip&#34;, &#34;0.0.0.0&#34;, &#34;ip address&#34;)
+	flag.IntVar(&amp;port, &#34;port&#34;, 8000, &#34;port number&#34;)
+}
+
+func main() {
+	flag.Parse()
+	fmt.Printf(&#34;%s:%d&#34;, ip, port)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/text-template" target="_blank">Report an issue</a>
+                    <h2 id=text-template>text-template</h2>
+
+                    <div class="bs-example gq-question">
+                        Complete the code in line A, to generate content with text template for at most 3 tiers. The expected output is as follows:
+A
+ B
+  C
+ D
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;log&#34;
+	&#34;os&#34;
+	&#34;text/template&#34;
+)
+
+func main() {
+	const tpl = `
+
+` // A
+
+	type Tree struct {
+		Name     string
+		Children []Tree
+	}
+	root := Tree{
+		&#34;A&#34;, []Tree{
+			Tree{&#34;B&#34;, []Tree{
+				Tree{&#34;C&#34;, []Tree{}},
+			}},
+			Tree{&#34;D&#34;, []Tree{}},
+		},
+	}
+
+	t := template.Must(template.New(&#34;tree&#34;).Parse(tpl))
+
+	err := t.Execute(os.Stdout, root)
+	if err != nil {
+		log.Fatalf(&#34;executing template:&#34;, err)
+	}
+
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;log&#34;
+	&#34;os&#34;
+	&#34;text/template&#34;
+)
+
+func main() {
+	const tpl = `{{.Name}}{{range $child := .Children}}
+ {{$child.Name}}{{range $grandchild := $child.Children}}
+  {{$grandchild.Name}}{{end}}{{end}}
+` // A
+
+	type Tree struct {
+		Name     string
+		Children []Tree
+	}
+	root := Tree{
+		&#34;A&#34;, []Tree{
+			Tree{&#34;B&#34;, []Tree{
+				Tree{&#34;C&#34;, []Tree{}},
+			}},
+			Tree{&#34;D&#34;, []Tree{}},
+		},
+	}
+
+	t := template.Must(template.New(&#34;tree&#34;).Parse(tpl))
+
+	err := t.Execute(os.Stdout, root)
+	if err != nil {
+		log.Fatalf(&#34;executing template:&#34;, err)
+	}
+
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/html-template" target="_blank">Report an issue</a>
+                    <h2 id=html-template>html-template</h2>
+
+                    <div class="bs-example gq-question">
+                        Compare and contrast html/template and text/template.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+html/template and text/template have the same APIs, while html/template has additional security features against attacks like code injection.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/http-server" target="_blank">Report an issue</a>
+                    <h2 id=http-server>http server</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blanks in line A and B, to respond to any http requests on port 8000 with response &#34;hello&#34;
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;net/http&#34;
+)
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc(&#34;/&#34;, func(w http.ResponseWriter, req *http.Request) {
+		___ //A
+	})
+	// B
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;net/http&#34;
+)
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc(&#34;/&#34;, func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprintf(w, &#34;hello&#34;)
+	})
+	http.ListenAndServe(&#34;:8000&#34;, mux)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/sql-query" target="_blank">Report an issue</a>
+                    <h2 id=sql-query>sql query</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blanks in line ABCD, to print out all the rows and potential errors.
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+age := 27
+rows, err := db.Query(&#34;SELECT name FROM users WHERE age=?&#34;, age)
+if err != nil {
+        log.Fatal(err)
+}
+defer ___ // A
+for ___ { //B
+        var name string
+        if err := ___; err != nil { //C
+                log.Fatal(err)
+        }
+        fmt.Printf(&#34;%s is %d\n&#34;, name, age)
+}
+if err := ___; err != nil { //D
+        log.Fatal(err)
+}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+age := 27
+rows, err := db.Query(&#34;SELECT name FROM users WHERE age=?&#34;, age)
+if err != nil {
+        log.Fatal(err)
+}
+defer rows.Close()
+for rows.Next() {
+        var name string
+        if err := rows.Scan(&amp;name); err != nil {
+                log.Fatal(err)
+        }
+        fmt.Printf(&#34;%s is %d\n&#34;, name, age)
+}
+if err := rows.Err(); err != nil {
+        log.Fatal(err)
+}
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                </div><div class=bs-docs-section>
+                    <h1 class=page-header id=toolchain>Toolchain</h1>
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/gcflags" target="_blank">Report an issue</a>
+                    <h2 id=gcflags>gcflags</h2>
+
+                    <div class="bs-example gq-question">
+                        Explain the meaning of the following options of gcflags 
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+-l:
+-m:
+-N:
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+-l:disable function inlining
+-m:show the escape analysis and the choice of inlining
+-N:disable optimization
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/benchmark-N" target="_blank">Report an issue</a>
+                    <h2 id=benchmark-N>benchmark</h2>
+
+                    <div class="bs-example gq-question">
+                        Explain how b.N is determined.
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+func BenchmarkFib10(b *testing.B) {
+	for n := 0; n &lt; b.N; n&#43;&#43; {
+		Fib(10)
+	}
+}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+The value of b.N will increase each time until the benchmark runner is satisfied with the stability of the benchmark.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/vendor-gopath" target="_blank">Report an issue</a>
+                    <h2 id=vendor-gopath>package management</h2>
+
+                    <div class="bs-example gq-question">
+                        How doesn go package management tools(i.e. godep, govendor) segregate dependencies from $GOPATH?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+Go package management tools save dependencies in ./vendor/ which is introduced from 1.6 in order to include project-specific dependencies without polluting the global $GOPATH
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/GOMAXPROCS" target="_blank">Report an issue</a>
+                    <h2 id=GOMAXPROCS>GOMAXPROCS</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?
+Will it be different when line A is changed to `GOMAXPROCS=2` ?
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;runtime&#34;
+	&#34;sync&#34;
+)
+
+func main() {
+	const GOMAXPROCS = 4 //A
+	runtime.GOMAXPROCS(GOMAXPROCS)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+		for char := 0; char &lt; 26; char&#43;&#43; {
+			fmt.Printf(&#34;%c &#34;, &#39;A&#39;&#43;char)
+		}
+	}()
+	go func() {
+		defer wg.Done()
+		for char := 0; char &lt; 26; char&#43;&#43; {
+			fmt.Printf(&#34;%c &#34;, &#39;a&#39;&#43;char)
+		}
+	}()
+
+	wg.Wait()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+When GOMAXPROCS=1, the printed output will be a-zA-Z.
+When GOMAXPROCS=2, a-z will be mixed with A-Z.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/shared-object" target="_blank">Report an issue</a>
+                    <h2 id=shared-object>shared object</h2>
+
+                    <div class="bs-example gq-question">
+                        1. Compile str.go to shared object(str.so).
+2. Fill in the blanks in line A and B to call function `UpperCase(string) string`.
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+// str.go
+package main
+
+import &#34;strings&#34;
+
+func UpperCase(s string) string {
+	return strings.ToUpper(s)
+}
+
+
+// main.go
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;log&#34;
+	&#34;plugin&#34;
+)
+
+func main() {
+	p, err := plugin.Open(&#34;str.so&#34;)
+	if err != nil {
+		log.Panicf(&#34;plugin.Open: %s\n&#34;, err)
+	}
+	f, err := ___ // A
+	if err != nil {
+		log.Panicf(&#34;Lookup UpperCase: %s\n&#34;, err)
+	}
+	UpperCase, ok := ___ // B
+	if !ok {
+		log.Panicf(&#34;UpperCase assertion: %s\n&#34;, err)
+	}
+	s := UpperCase(&#34;hello&#34;)
+	fmt.Println(s)
+}
+
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+go build -buildmode=plugin -o str.so str.go
+
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;log&#34;
+	&#34;plugin&#34;
+)
+
+func main() {
+	p, err := plugin.Open(&#34;str.so&#34;)
+	if err != nil {
+		log.Panicf(&#34;plugin.Open: %s\n&#34;, err)
+	}
+	f, err := p.Lookup(&#34;UpperCase&#34;)
+	if err != nil {
+		log.Panicf(&#34;Lookup UpperCase: %s\n&#34;, err)
+	}
+	UpperCase, ok := f.(func(string) string)
+	if !ok {
+		log.Panicf(&#34;UpperCase assertion: %s\n&#34;, err)
+	}
+	s := UpperCase(&#34;hello&#34;)
+	fmt.Println(s)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/GODEBUG" target="_blank">Report an issue</a>
+                    <h2 id=GODEBUG>GODEBUG</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly explain the meaning of the following options of GODEBUG
+GODEBUG=gctrace=1,schedtrace=1000
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+Print the debug info of gc and go scheduler&#39;s states every 1000ms
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/GOROOT-GOPATH" target="_blank">Report an issue</a>
+                    <h2 id=GOROOT-GOPATH>$GOROOT vs $GOPATH</h2>
+
+                    <div class="bs-example gq-question">
+                        What is $GOROOT and $GOPATH?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+$GOROOT is the root directory for standard library, including executables, source code and docs.
+$GOPATH is the directory for 3rd party packages.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/go-generate" target="_blank">Report an issue</a>
+                    <h2 id=go-generate>go generate</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly describe how go generate works.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+go generate will search specified directories or files for comments like &#34;//go:generate&#34;, and replace with the output of the execution of the given shell commands, and flush the final content to stdout.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/http-pprof" target="_blank">Report an issue</a>
+                    <h2 id=http-pprof>http server的pprof</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly describe how to use pprof to monitor the performance of http server.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+Add `import _ &#34;net/http/pprof&#34;` in the main.go
+Run the following commands to get info correspondingly:
+CPU profile:
+go tool pprof http://localhost:6060/debug/pprof/profile --second N
+heap profile:
+go tool pprof http://localhost:6060/debug/pprof/heap
+goroutine blocking profile:
+go tool pprof http://localhost:6060/debug/pprof/block
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/path-wildcard" target="_blank">Report an issue</a>
+                    <h2 id=path-wildcard>./...</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the meaning of &#34;./...&#34; in the terminal commands?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+It is the wildcard stands for .(current directory) and all its subdirectories recursively.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                </div><div class=bs-docs-section>
+                    <h1 class=page-header id=internals>Internals</h1>
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/unsafe-bytes-string" target="_blank">Report an issue</a>
+                    <h2 id=unsafe-bytes-string>String Internals</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blank in line A, to convert b from []byte to string without causing memory copy.
+The expected output is &#34;143&#34;
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unsafe&#34;
+)
+
+func main() {
+	var b = []byte(&#34;123&#34;)
+	s := __ //A
+
+	b[1] = &#39;4&#39;
+	fmt.Printf(&#34;%&#43;v\n&#34;, s) //print 143
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unsafe&#34;
+)
+
+func main() {
+	var b = []byte(&#34;123&#34;)
+	s := *(*string)(unsafe.Pointer(&amp;b))
+
+	b[1] = &#39;4&#39;
+	fmt.Printf(&#34;%&#43;v\n&#34;, s) //print 143
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/unsafe-slice-array" target="_blank">Report an issue</a>
+                    <h2 id=unsafe-slice-array>Slice Internals</h2>
+
+                    <div class="bs-example gq-question">
+                        Fill in the blank in line A, to assure that printOriginalSlice will print the original slice of a subslice
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;reflect&#34;
+	&#34;unsafe&#34;
+)
+
+const M = 10
+const N = 5
+
+func printOriginalSlice(subslice *[]int) {
+	data := __ //A
+
+	fmt.Printf(&#34;original\t%p:%&#43;v\n&#34;, data, *data)
+}
+
+func main() {
+	slice := make([]int, M)
+	for i, _ := range slice {
+		slice[i] = i
+	}
+	subslice := slice[0:N]
+
+	fmt.Printf(&#34;slice\t%p:%&#43;v\n&#34;, &amp;slice, slice)
+	fmt.Printf(&#34;subslice\t%p:%&#43;v\n&#34;, &amp;subslice, subslice)
+	printOriginalSlice(&amp;subslice)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;reflect&#34;
+	&#34;unsafe&#34;
+)
+
+const M = 10
+const N = 5
+
+func printOriginalSlice(subslice *[]int) {
+	data := (*[M]int)(unsafe.Pointer(((*reflect.SliceHeader)(unsafe.Pointer(subslice))).Data))
+
+	fmt.Printf(&#34;original\t%p:%&#43;v\n&#34;, data, *data)
+}
+
+func main() {
+	slice := make([]int, M)
+	for i, _ := range slice {
+		slice[i] = i
+	}
+	subslice := slice[0:N]
+
+	fmt.Printf(&#34;slice\t%p:%&#43;v\n&#34;, &amp;slice, slice)
+	fmt.Printf(&#34;subslice\t%p:%&#43;v\n&#34;, &amp;subslice, subslice)
+	printOriginalSlice(&amp;subslice)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/defer-overhead" target="_blank">Report an issue</a>
+                    <h2 id=defer-overhead>defer overhead</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the overhead of defer?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+runtime.deferproc and runtime.deferreturn cause context copy and retrieval on stack memory
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/map-malloc" target="_blank">Report an issue</a>
+                    <h2 id=map-malloc>Map malloc Threshold</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the malloc threshold of Map object? How to modify it?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+The default limit is 128.
+It can be modified by changing the value of maxKeySize and maxValueSize in runtime.hashmap
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/runtime-newobject" target="_blank">Report an issue</a>
+                    <h2 id=runtime-newobject>runtime.newobject()</h2>
+
+                    <div class="bs-example gq-question">
+                        What does runtime.newobject() do?
+Does make() and `new` operation always invoke runtime.newobject()?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+runtime.newobject() is to allocate heap memory.
+make() and `new` operation will not invoke runtime.newobject() when it is inlined or optimized.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/SSA" target="_blank">Report an issue</a>
+                    <h2 id=SSA>SSA</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly introduce the benefits of SSA(Static Single Assignment) form.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+Remove unnecessary code
+Remove redundant varibles and logics
+Optimize register or memory allocation
+Transform varibles to constants when possible
+Transform &#34;high cost&#34; instructions to &#34;low cost&#34;
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/AST" target="_blank">Report an issue</a>
+                    <h2 id=AST>AST</h2>
+
+                    <div class="bs-example gq-question">
+                        What will be printed when the code below is executed?(Hint: Use the template below)
+*ast.File:
+        ____: ____
+        *ast.GenDecl:
+                *ast.ValueSpec:
+                        ____: ____
+                        ____: ____
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;go/ast&#34;
+	&#34;go/parser&#34;
+	&#34;go/token&#34;
+	&#34;log&#34;
+	&#34;strings&#34;
+)
+
+func main() {
+	fs := token.NewFileSet()
+	f, err := parser.ParseFile(fs, &#34;&#34;, &#34;package main; var a = 0&#34;, parser.AllErrors)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var v visitor
+	ast.Walk(v, f)
+}
+
+type visitor int
+
+func (v visitor) Visit(n ast.Node) ast.Visitor {
+	if n == nil {
+		return nil
+	}
+	var s string
+	switch node := n.(type) {
+	case *ast.Ident:
+		s = node.Name
+	case *ast.BasicLit:
+		s = node.Value
+	}
+	fmt.Printf(&#34;%s%T: %s\n&#34;, strings.Repeat(&#34;\t&#34;, int(v)), n, s)
+	return v &#43; 1
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">Run</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/bootstrap" target="_blank">Report an issue</a>
+                    <h2 id=bootstrap>Go Bootstrapping</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly describe the bootstrapping process of a go executable.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+Run the platform-specific assembly that is located under $GOROOT/src/runtime/
+runtime·args(): Parse terminal arguments
+runtime·osinit(): Initialize CPU cores
+runtime·schedinit(): Initialize goroutine scheduler, stack memory, terminal arguments, environment variables, debug parameter, gc, GOMAXPROCS, ...
+runtime·mstart(): Start gc monitor, enable gc, import dependencies and run init() functions, finally run main.main()
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/channel-buffering" target="_blank">Report an issue</a>
+                    <h2 id=channel-buffering>Unbuffered and Buffered Channels</h2>
+
+                    <div class="bs-example gq-question">
+                        What are the differences between unbuffered and buffered channels?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+For unbuffered channel, the sender will block on the channel until the receiver receives the data from the channel, whilst the receiver will also block on the channel until sender sends data into the channel. 
+Compared with unbuffered counterpart, the sender of buffered channel will block when there is no empty slot of the channel, while the receiver will block on the channel when it is empty.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/finalizer" target="_blank">Report an issue</a>
+                    <h2 id=finalizer>Destructor</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the destructor in go?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+There is no destructor in go. But runtime.SetFinalizer() can set a callback function for a pointer.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/gc" target="_blank">Report an issue</a>
+                    <h2 id=gc>Garbage Collection</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly describe how gc works in go?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+MarkWorker goroutine recursively scan all the objects and colors them into white(inaccessible), gray(pending), black(accessible). But finally they will only be black and white objcts.
+In compile time, the compiler has already injected a snippet called write barrier to monitor all the modifications from any goroutines to heap memory.
+When &#34;Stop the world&#34; is performed, scheduler hibernates all threads and preempt all goroutines.
+Garbage collector will recycle all the inaccessible objects so heap or central can reuse.
+If the whole span of memory are unused, it can be freed to OS.
+Perform &#34;Start the world&#34; to wake cpu cores and threads, and resume the execution of goroutines.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/goroutine-sleep" target="_blank">Report an issue</a>
+                    <h2 id=goroutine-sleep>Goroutine Sleep</h2>
+
+                    <div class="bs-example gq-question">
+                        What is the difference between C.sleep() and time.Sleep()?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+C.sleep() invokes syscall sleep, which causes idle threads
+time.Sleep() is optimized for goroutine so syscall sleep is not involved.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/object-memory" target="_blank">Report an issue</a>
+                    <h2 id=object-memory>Memory Allocation</h2>
+
+                    <div class="bs-example gq-question">
+                        Briefly introduce the strategies that how go runtime allocates memory.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+For small objects(&lt;=32KB), go runtime starts with cache firstly, then central, and finally heap.
+For big objects(&gt;32KB), directly from heap.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/stack-heap" target="_blank">Report an issue</a>
+                    <h2 id=stack-heap>Stack vs Heap</h2>
+
+                    <div class="bs-example gq-question">
+                        When go runtime allocates memory from heap, and when from stack?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+For small objects whose life cycle is only within the stack frame, stack memory is allocated.
+For small objects that will be passed across stack frames, heap memory.
+For big objects(&gt;32KB), heap memory.
+For small objects that could escape to heap but actually inlined, stack memory.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/stop-goroutine" target="_blank">Report an issue</a>
+                    <h2 id=stop-goroutine>Goroutine Pause or Halt</h2>
+
+                    <div class="bs-example gq-question">
+                        List the functions can stop or suspend the execution of current goroutine, and explain their differences.
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">Answer</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+runtime.Gosched: give up CPU core and join the queue, thus will be executed automatically.
+runtime.gopark: blocked until the callback function unlockf in argument list return false.
+runtime.notesleep: hibernate the thread.
+runtime.Goexit: stop the execution of goroutine immediately and call defer, but it will not cause panic.
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                </div>
+
+                <div class=bs-docs-section>
+                    <h1 class=page-header id=references>References</h1>
+                    <h2 id=golang-ref-spec><a target="_blank" href="https://golang.org/ref/spec">Go Language Specification</a></h2>
+                    <h2 id=golang-ref-pkg><a target="_blank" href="https://golang.org/pkg/">Go Packages</a></h2>
+                    <h2 id=book-go-yuhen><a target="_blank" href="https://www.amazon.com/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%9B%A8%E7%97%95/dp/B01N23X9CZ/">Go Study Notes - Yuhen</a></h2>
+                    <h2 id=gotchas-and-common-mistakes-in-go-golang><a target="_blank" href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/">Common Mistakes for New Golang Devs</a></h2>
+                    <h2 id=dave-cheney-go><a target="_blank" href="https://dave.cheney.net/category/golang">Dave Cheney's Blog</a></h2>
+                    <h2 id=golangweekly><a target="_blank" href="https://golangweekly.com/">Golang Weekly</a></h2>
+                </div>
+
+            </div>
+
+            <div class=col-md-3 role=complementary>
+                <nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs">
+                    <ul class="nav bs-docs-sidenav">
+                        <li>
+                            <a href=#lang-spec>Language Specification</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#subslice-grow>Subslice</a>
+                                </li><li>
+                                    <a href=#short-declairation>Short Declairation</a>
+                                </li><li>
+                                    <a href=#interface-nil>Nil Interfaces</a>
+                                </li><li>
+                                    <a href=#map-ok-idiom>Map Ok-Idiom</a>
+                                </li><li>
+                                    <a href=#pointer>Pointers</a>
+                                </li><li>
+                                    <a href=#empty-interface>interface{} Pointers</a>
+                                </li><li>
+                                    <a href=#for-pointer>Temporary Pointer</a>
+                                </li><li>
+                                    <a href=#label-break>Break Outer Loop</a>
+                                </li><li>
+                                    <a href=#global-varible>Global Varibles</a>
+                                </li><li>
+                                    <a href=#defer-closefile>Defer Stack</a>
+                                </li><li>
+                                    <a href=#defer-panic>Panic Stack</a>
+                                </li><li>
+                                    <a href=#defer-recover>recover()</a>
+                                </li><li>
+                                    <a href=#goroutine-closure>Goroutine Closures</a>
+                                </li><li>
+                                    <a href=#type-shadowing>Type Shadowing</a>
+                                </li><li>
+                                    <a href=#string-bytes>String to Bytes</a>
+                                </li><li>
+                                    <a href=#mutex-map>Map Mutex</a>
+                                </li><li>
+                                    <a href=#DeepEqual>DeepEqual</a>
+                                </li><li>
+                                    <a href=#Gosched>Gosched</a>
+                                </li><li>
+                                    <a href=#map-addressing>Map Immutability</a>
+                                </li><li>
+                                    <a href=#sort-Slice>Slice Sorting</a>
+                                </li>
+                            </ul>
+                        </li><li>
+                            <a href=#lib-pack>Standard library and Packages</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#init-import>init()</a>
+                                </li><li>
+                                    <a href=#json-unmarshal>json unmarshalling</a>
+                                </li><li>
+                                    <a href=#utf8-len>utf8 length</a>
+                                </li><li>
+                                    <a href=#regex-multiline>regex multiline mode</a>
+                                </li><li>
+                                    <a href=#readline>readline</a>
+                                </li><li>
+                                    <a href=#container-heap>Heap</a>
+                                </li><li>
+                                    <a href=#context-withtimeout>context.WithTimeout</a>
+                                </li><li>
+                                    <a href=#flag>flag</a>
+                                </li><li>
+                                    <a href=#text-template>text-template</a>
+                                </li><li>
+                                    <a href=#html-template>html-template</a>
+                                </li><li>
+                                    <a href=#http-server>http server</a>
+                                </li><li>
+                                    <a href=#sql-query>sql query</a>
+                                </li>
+                            </ul>
+                        </li><li>
+                            <a href=#toolchain>Toolchain</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#gcflags>gcflags</a>
+                                </li><li>
+                                    <a href=#benchmark-N>benchmark</a>
+                                </li><li>
+                                    <a href=#vendor-gopath>package management</a>
+                                </li><li>
+                                    <a href=#GOMAXPROCS>GOMAXPROCS</a>
+                                </li><li>
+                                    <a href=#shared-object>shared object</a>
+                                </li><li>
+                                    <a href=#GODEBUG>GODEBUG</a>
+                                </li><li>
+                                    <a href=#GOROOT-GOPATH>$GOROOT vs $GOPATH</a>
+                                </li><li>
+                                    <a href=#go-generate>go generate</a>
+                                </li><li>
+                                    <a href=#http-pprof>http server的pprof</a>
+                                </li><li>
+                                    <a href=#path-wildcard>./...</a>
+                                </li>
+                            </ul>
+                        </li><li>
+                            <a href=#internals>Internals</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#unsafe-bytes-string>String Internals</a>
+                                </li><li>
+                                    <a href=#unsafe-slice-array>Slice Internals</a>
+                                </li><li>
+                                    <a href=#defer-overhead>defer overhead</a>
+                                </li><li>
+                                    <a href=#map-malloc>Map malloc Threshold</a>
+                                </li><li>
+                                    <a href=#runtime-newobject>runtime.newobject()</a>
+                                </li><li>
+                                    <a href=#SSA>SSA</a>
+                                </li><li>
+                                    <a href=#AST>AST</a>
+                                </li><li>
+                                    <a href=#bootstrap>Go Bootstrapping</a>
+                                </li><li>
+                                    <a href=#channel-buffering>Unbuffered and Buffered Channels</a>
+                                </li><li>
+                                    <a href=#finalizer>Destructor</a>
+                                </li><li>
+                                    <a href=#gc>Garbage Collection</a>
+                                </li><li>
+                                    <a href=#goroutine-sleep>Goroutine Sleep</a>
+                                </li><li>
+                                    <a href=#object-memory>Memory Allocation</a>
+                                </li><li>
+                                    <a href=#stack-heap>Stack vs Heap</a>
+                                </li><li>
+                                    <a href=#stop-goroutine>Goroutine Pause or Halt</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href=#references>References</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#golang-ref-spec>The Go Programming Language Specification</a>
+                                    <a href=#golang-ref-pkg>Packages - The Go Programming Language</a>
+                                    <a href=#book-go-yuhen>Go Study Notes - Yuhen</a>
+                                    <a href=#gotchas-and-common-mistakes-in-go-golang>Common Mistakes for New Golang Devs</a>
+                                    <a href=#dave-cheney-go>Dave Cheney's Blog</a>
+                                    <a href=#golangweekly>Golang Weekly</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a href=#top class=back-to-top> Back to top </a>
+                </nav>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12643045-7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-12643045-7');
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>

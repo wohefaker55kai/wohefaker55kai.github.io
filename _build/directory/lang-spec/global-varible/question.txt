@@ -1,0 +1,1 @@
+To declare g as a global variable, which clauses below are correct?

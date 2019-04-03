@@ -1,0 +1,128 @@
+---
+sections:
+  - key: lang-spec
+    name: Language Specification
+    quizzes:
+      - key: subslice-grow
+        name: Subslice
+      - key: short-declairation
+        name: Short Declairation
+      - key: interface-nil
+        name: Nil Interfaces
+      - key: map-ok-idiom
+        name: Map Ok-Idiom
+      - key: pointer
+        name: Pointers
+      - key: empty-interface
+        name: interface{} Pointers
+      - key: for-pointer
+        name: Temporary Pointer
+      - key: label-break
+        name: Break Outer Loop
+      - key: global-varible
+        name: Global Varibles
+      - key: defer-closefile
+        name: Defer Stack
+      - key: defer-panic
+        name: Panic Stack
+      - key: defer-recover
+        name: recover()
+      - key: goroutine-closure
+        name: Goroutine Closures
+      - key: type-shadowing
+        name: Type Shadowing
+      - key: string-bytes
+        name: String to Bytes
+      - key: mutex-map
+        name: Map Mutex
+      - key: DeepEqual
+        name: DeepEqual
+      - key: Gosched
+        name: Gosched
+      - key: map-addressing
+        name: Map Immutability
+      - key: sort-Slice
+        name: Slice Sorting
+  - key: lib-pack
+    name: Standard library and Packages
+    quizzes:
+      - key: init-import
+        name: init()
+      - key: json-unmarshal
+        name: json unmarshalling
+      - key: utf8-len
+        name: utf8 length
+      - key: regex-multiline
+        name: regex multiline mode
+      - key: readline
+        name: readline
+      - key: container-heap
+        name: Heap
+      - key: context-withtimeout
+        name: context.WithTimeout
+      - key: flag
+        name: flag
+      - key: text-template
+        name: text-template
+      - key: html-template
+        name: html-template
+      - key: http-server
+        name: http server
+      - key: sql-query
+        name: sql query
+  - key: toolchain
+    name: Toolchain
+    quizzes:
+      - key: gcflags
+        name: gcflags
+      - key: benchmark-N
+        name: benchmark
+      - key: vendor-gopath
+        name: package management
+      - key: GOMAXPROCS
+        name: GOMAXPROCS
+      - key: shared-object
+        name: shared object
+      - key: GODEBUG
+        name: GODEBUG
+      - key: GOROOT-GOPATH
+        name: $GOROOT vs $GOPATH
+      - key: go-generate
+        name: go generate
+      - key: http-pprof
+        name: http server的pprof
+      - key: path-wildcard
+        name: ./...
+  - key: internals
+    name: Internals
+    quizzes:
+      - key: unsafe-bytes-string
+        name: String Internals
+      - key: unsafe-slice-array
+        name: Slice Internals
+      - key: defer-overhead
+        name: defer overhead
+      - key: map-malloc
+        name: Map malloc Threshold
+      - key: runtime-newobject
+        name: runtime.newobject()
+      - key: SSA
+        name: SSA
+      - key: AST
+        name: AST
+      - key: bootstrap
+        name: Go Bootstrapping
+      - key: channel-buffering
+        name: Unbuffered and Buffered Channels
+      - key: finalizer
+        name: Destructor
+      - key: gc
+        name: Garbage Collection
+      - key: goroutine-sleep
+        name: Goroutine Sleep
+      - key: object-memory
+        name: Memory Allocation
+      - key: stack-heap
+        name: Stack vs Heap
+      - key: stop-goroutine
+        name: Goroutine Pause or Halt

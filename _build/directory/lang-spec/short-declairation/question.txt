@@ -1,0 +1,1 @@
+Assuming x is declared and y is not declared, which clauses below are correct?

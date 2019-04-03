@@ -1,0 +1,5 @@
+Run the platform-specific assembly that is located under $GOROOT/src/runtime/
+runtime·args(): Parse terminal arguments
+runtime·osinit(): Initialize CPU cores
+runtime·schedinit(): Initialize goroutine scheduler, stack memory, terminal arguments, environment variables, debug parameter, gc, GOMAXPROCS, ...
+runtime·mstart(): Start gc monitor, enable gc, import dependencies and run init() functions, finally run main.main()

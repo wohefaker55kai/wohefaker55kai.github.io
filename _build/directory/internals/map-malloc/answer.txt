@@ -1,0 +1,2 @@
+The default limit is 128.
+It can be modified by changing the value of maxKeySize and maxValueSize in runtime.hashmap

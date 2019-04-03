@@ -1,0 +1,1 @@
+html/template and text/template have the same APIs, while html/template has additional security features against attacks like code injection.

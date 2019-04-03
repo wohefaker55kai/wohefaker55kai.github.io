@@ -1,0 +1,2 @@
+Fill in the blank in line A, to convert b from []byte to string without causing memory copy.
+The expected output is "143"

@@ -1,0 +1,4 @@
+bufio.Scanner.Scan(): Best suited
+fmt.Fscanf(): Only applicable to formated lines
+bufio.Reader.ReadLine(): Very low level. May require more invocations when buffer limit is exceeded.
+bufio.ReadString('\n'): Cannot handle EOF

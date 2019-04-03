@@ -1,0 +1,4 @@
+For small objects whose life cycle is only within the stack frame, stack memory is allocated.
+For small objects that will be passed across stack frames, heap memory.
+For big objects(>32KB), heap memory.
+For small objects that could escape to heap but actually inlined, stack memory.

@@ -1,0 +1,2 @@
+What will be printed when the code below is executed?
+What will be the exit code after the code below is executed?

@@ -1,0 +1,1 @@
+Fix the mistake below to assure the length of utf8 string can be printed correctly.

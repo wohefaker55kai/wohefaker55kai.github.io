@@ -1,0 +1,2 @@
+C.sleep() invokes syscall sleep, which causes idle threads
+time.Sleep() is optimized for goroutine so syscall sleep is not involved.

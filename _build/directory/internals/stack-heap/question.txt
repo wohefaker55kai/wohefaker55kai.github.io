@@ -1,0 +1,1 @@
+When go runtime allocates memory from heap, and when from stack?
